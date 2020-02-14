@@ -1,52 +1,5 @@
---SQL Homework
+--SQL Queries for sql-challenge homework
 
---Link to ERD : https://app.quickdatabasediagrams.com/#/d/8K5BCU
-
---Table Schemata
-CREATE TABLE employees(
-	emp_no SERIAL PRIMARY KEY NOT NULL,
-	birth_date DATE,
-	first_name VARCHAR(20),
-	last_name VARCHAR(30),
-	gender VARCHAR(2),
-	hire_date DATE
-);
-
-CREATE TABLE departments(
-	dept_no VARCHAR(5) PRIMARY KEY NOT NULL,
-	dept_name VARCHAR(25)
-);
-
-CREATE TABLE dept_emp(
-	emp_no INT,
-	dept_no VARCHAR(5), 
-	from_date DATE,
-	to_date DATE
-);
-
-CREATE TABLE dept_manager(
-	dept_no VARCHAR(5),
-	emp_no INT,
-	from_date DATE,
-	to_date DATE
-);
-
-
-CREATE TABLE titles(
-	emp_no INT,
-	title VARCHAR(25) NOT NULL,
-	from_date DATE,
-	to_date DATE
-);
-
-CREATE TABLE salaries(
-	emp_no INT,
-	salary BIGINT,
-	from_date DATE,
-	to_date DATE
-);
-
-/*--------------------------------------------------------------------*/
 
 --QUERY 1
 SELECT e.emp_no,
@@ -138,34 +91,22 @@ GROUP BY last_name
 ORDER BY count_lname DESC;
 
 
---BONUS
-/*from sqlalchemy import create_engine
-engine = create_engine('postgresql://localhost:5432/<your_db_name>')
-connection = engine.connect()
-*/
+
+/*--------------BONUS: see sql-bonus.ipynb file--------------*/
 SELECT MAX(salary)
 FROM salaries;
 --129492
-
 SELECT MIN(salary)
 FROM salaries;
 --40000
-
 SELECT COUNT(salary)
 FROM salaries;
 --300024
-
 SELECT COUNT(DISTINCT(salary))
 FROM salaries;
 --50355
-/*Create a histogram to visualize the most common salary ranges for employees.*/
-
 SELECT COUNT(salary)
 FROM salaries
 WHERE salary BETWEEN 31000 AND 45999;
 --132682
-
-
-
-/*Create a bar chart of average salary by title.*/
 --see "images/avg_sal_by_title.png"
